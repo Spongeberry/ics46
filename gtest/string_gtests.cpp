@@ -16,7 +16,7 @@ namespace {
 
 TEST(String, IndexOf) {
   String t{ "Test" };
-  EXPECT_EQ(1, t.indexOf("e"));
+  EXPECT_EQ(1, t.indexOf('e'));
 }
 
 // ADD YOUR TESTS HERE:

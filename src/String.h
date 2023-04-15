@@ -1,3 +1,5 @@
+#ifndef STRING_H
+#define STRING_H
 #include <iostream>
 
 class String
@@ -88,3 +90,6 @@ private:
 
 ostream & operator << ( ostream & out, const String & s );
 istream & operator >> ( istream & in, String & s );
+
+
+#endif
