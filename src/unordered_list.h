@@ -1,5 +1,9 @@
+#ifndef UNOREDERED_H
+#define UNOREDERED_H
 #include <string>
 using namespace std;
+#include <iostream>
+#include <fstream>
 
 constexpr int NWORDS = 45392;
 
@@ -77,3 +81,6 @@ void find_all_words(int k, string file_name, UnorderedList & L);
 void remove_all_words(int k, string file_name, UnorderedList & L);
 void measure_UnorderedList_methods(string file_name, UnorderedList & L);
 void measure_lists(string input_file);
+
+
+#endif

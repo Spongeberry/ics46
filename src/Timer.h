@@ -1,4 +1,6 @@
 /* C++ interface for program benchmark timer management. */
+#ifndef TIMER_H
+#define TIMER_H
 
 #include <stdlib.h>
 #include <sys/time.h>
@@ -110,3 +112,4 @@ int main()
 }
 */
 
+#endif
