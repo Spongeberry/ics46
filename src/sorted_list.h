@@ -1,4 +1,9 @@
+#ifndef SORTED_H
+#define SORTED_H
+#include "Timer.h"
 #include <string>
+#include <fstream>
+#include <iostream>
 using namespace std;
 
 constexpr int NWORDS = 45;
@@ -157,3 +162,6 @@ void find_all_words(int k, string file_name, SortedList & L);
 void remove_all_words(int k, string file_name, SortedList & L);
 void measure_SortedList_methods(string file_name, SortedList & L);
 void measure_lists(string input_file);
+
+
+#endif
