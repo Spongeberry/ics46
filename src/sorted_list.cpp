@@ -163,9 +163,11 @@ ListNode * ListNode::find(const string & word, ListNode * L) {
 }
 
 void ListNode::delete_list(ListNode * L) {
-    for (ListNode* later = L -> next; L; L = later, later = later ? later->next : nullptr){
-        delete L;
-    }
+    ListNode* curr = L;
+    while (curr != nullptr) {
+        ListNode* temp = curr;
+        curr = curr->next;
+        delete temp;
 }
 
 void ListNode::remove(const std::string & word, ListNode * & L) {
