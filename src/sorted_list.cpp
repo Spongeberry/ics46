@@ -1,5 +1,6 @@
 #include "sorted_list.h"
 #include <iostream>
+#include "Timer.h"
 using namespace std;
 
 //int capacity;
@@ -36,8 +37,8 @@ ostream & operator << (ostream & out, SortedList & L){
     return out;
 }
 
-SortedArrayList::SortedArrayList(int cap = NWORDS)
-:UnorderedList("SAL"), capacity(cap), size(0), buf(new string[cap]){}
+SortedArrayList::SortedArrayList(int cap)
+:SortedList("SAL"), capacity(cap), size(0), buf(new string[cap]){}
 
 void SortedArrayList::insert(const string & word){
     int hole = size;
@@ -56,7 +57,7 @@ bool SortedArrayList::find(const string & word){
 
 void SortedArrayList::remove(const string & word){
     int hole = SortedArrayList::find_index(word);
-    if (hole == -1):
+    if (hole == -1)
         cout << "item not in the list" << endl;
     --size;
     SortedArrayList::copy_up(hole);
@@ -78,3 +79,200 @@ SortedArrayList::~SortedArrayList(){
     delete[] buf;
 }
 
+SortedLinkedList::iterator::iterator(ListNode * const ptr) 
+    : current(ptr) {}
+
+SortedLinkedList::iterator & SortedLinkedList::iterator::operator ++ () {
+    if (current) {
+        current = current->next;
+    }
+    return *this;
+}
+
+SortedLinkedList::iterator SortedLinkedList::iterator::operator ++ (int) {
+    iterator tmp = *this;
+    ++(*this);
+    return tmp;
+}
+
+SortedLinkedList::iterator::reference SortedLinkedList::iterator::operator *() const {
+    return current->data;
+}
+
+SortedLinkedList::iterator::pointer SortedLinkedList::iterator::operator->() const {
+    return &(current->data);
+}
+
+bool SortedLinkedList::iterator::operator == (iterator const & other) const {
+    return current == other.current;
+}
+bool SortedLinkedList::iterator::operator != (iterator const & other) const {
+    return current != other.current;
+}
+
+SortedLinkedList::iterator SortedLinkedList::begin() {
+    return iterator(head);
+}
+
+SortedLinkedList::iterator SortedLinkedList::end() {
+    return iterator(nullptr);
+}
+
+//string data;
+//ListNode * next;
+void ListNode::print(ostream & out, ListNode * L){
+    for(ListNode * current = L; L; current = current -> next)
+        out << current -> data << ' ';
+}
+
+void ListNode::insert(const string & word, ListNode * & L) {
+    ListNode *newNode = new ListNode(word, nullptr);
+
+    // If the list is empty or the new node should be inserted at the beginning
+    if (L == nullptr || L->data > word) {
+        newNode->next = L;
+        L = newNode;
+        return;
+    }
+
+    // Traverse the list to find the appropriate position for the new node
+    ListNode *current = L;
+    while (current->next != nullptr && current->next->data < word) {
+        current = current->next;
+    }
+
+    // Insert the new node
+    newNode->next = current->next;
+    current->next = newNode;
+}
+
+ListNode * ListNode::find(const string & word, ListNode * L) {
+    ListNode *current = L;
+    while (current != nullptr && current->data <= word) {
+        if (current->data == word) {
+            return current;
+        }
+        current = current->next;
+    }
+    return nullptr; // Return nullptr if the word is not found in the list
+}
+
+void ListNode::delete_list(ListNode * L) {
+    for (ListNode* later = L -> next; L; L = later, later = later ? later->next : nullptr){
+        delete L;
+    }
+}
+
+void ListNode::remove(const std::string & word, ListNode * & L) {
+    ListNode *prev = nullptr;
+
+    for (ListNode *current = L; current; current = current->next) {
+        if (current->data == word) {
+            if (prev) {
+                prev->next = current->next;
+            } else {
+                L = current->next;
+            }
+            delete current;
+            break;
+        }
+        prev = current;
+    }
+}
+
+SortedLinkedList::SortedLinkedList()
+:SortedList("SLL"), head(nullptr) {}
+
+void SortedLinkedList::insert(const std::string & word) {
+    ListNode::insert(word, head);
+}
+
+bool SortedLinkedList::find(const std::string & word) {
+    return ListNode::find(word, head) != nullptr;
+}
+
+void SortedLinkedList::remove(const std::string & word) {
+    ListNode::remove(word, head);
+}
+
+bool SortedLinkedList::is_empty() {
+    return head == nullptr;
+}
+
+bool SortedLinkedList::is_full() {
+    return false;
+}
+
+void SortedLinkedList::print(std::ostream & out) {
+    ListNode::print(out, head);
+}
+
+SortedLinkedList::~SortedLinkedList() {
+    ListNode::delete_list(head);
+}
+
+void error(string word, string msg)
+{
+    cout << "ERROR: " << word << " " << msg << endl;
+}
+
+void insert_all_words(int k, string file_name, SortedList & L){
+    Timer t;
+    double eTime;
+    ifstream in(file_name);
+    int limit = k * NWORDS / 10;
+    t.start();
+    for (string word; (in >> word) && limit > 0; --limit)
+        L.insert(word);
+        cout << L << endl;
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout << "\t\tI = " << eTime << endl;
+}
+
+void find_all_words(int k, string file_name, SortedList & L) {
+    Timer t;
+    double eTime;
+    ifstream in(file_name);
+    int limit = k * NWORDS / 10;
+    t.start();
+    for (string word; (in >> word) && limit > 0; --limit)
+        L.find(word);
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout << "\t\tF = " << eTime << endl;
+}
+
+void remove_all_words(int k, string file_name, SortedList & L) {
+    Timer t;
+    double eTime;
+    ifstream in(file_name);
+    int limit = k * NWORDS / 10;
+    t.start();
+    for (string word; (in >> word) && limit > 0; --limit)
+        L.remove(word);
+        cout << L << endl;
+    t.elapsedUserTime(eTime);
+    in.close();
+    cout << "\t\tR = " << eTime << endl;
+}
+
+void measure_UnorderedList_methods(string file_name, SortedList & L){
+    cout << L.name << endl;
+    int K = 1;
+    for (K = 1; K <= 10; ++K){
+        cout << "\tK = " << K << endl;
+        insert_all_words(K, file_name, L);
+        find_all_words(K, file_name, L);
+        remove_all_words(K, file_name, L);
+        if ( !L.is_empty() )
+            error(L.name, "is not empty");
+    }
+}
+
+void measure_lists(string input_file){
+    //SortedArrayList SAL(NWORDS);
+    //measure_UnorderedList_methods(input_file, SAL);
+    SortedLinkedList SLL;
+    measure_UnorderedList_methods(input_file, SLL);
+}

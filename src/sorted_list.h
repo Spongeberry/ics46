@@ -1,12 +1,11 @@
 #ifndef SORTED_H
 #define SORTED_H
-#include "Timer.h"
 #include <string>
 #include <fstream>
 #include <iostream>
 using namespace std;
 
-constexpr int NWORDS = 45;
+constexpr int NWORDS = 45392;
 // constexpr int NWORDS = 45392;
 
 struct SortedList

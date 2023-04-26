@@ -3,6 +3,5 @@
 
 int main()
 {
-    cout << "i love you";
-    //measure_lists("random.txt");
+    measure_lists("random.txt");
 }
