@@ -168,7 +168,7 @@ void ListNode::delete_list(ListNode * L) {
         ListNode* temp = curr;
         curr = curr->next;
         delete temp;
-    head = nullptr;
+    }
 }
 
 void ListNode::remove(const std::string & word, ListNode * & L) {
@@ -259,7 +259,6 @@ void remove_all_words(int k, string file_name, SortedList & L) {
     t.start();
     for (string word; (in >> word) && limit > 0; --limit)
         L.remove(word);
-    cout << L << endl;
     t.elapsedUserTime(eTime);
     in.close();
     cout << "\t\tR = " << eTime << endl;
@@ -280,8 +279,8 @@ void measure_UnorderedList_methods(string file_name, SortedList & L){
 }
 
 void measure_lists(string input_file){
-    //SortedArrayList SAL(NWORDS);
-    //measure_UnorderedList_methods(input_file, SAL);
+    SortedArrayList SAL(NWORDS);
+    measure_UnorderedList_methods(input_file, SAL);
     SortedLinkedList SLL;
     measure_UnorderedList_methods(input_file, SLL);
 }
