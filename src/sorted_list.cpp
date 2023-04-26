@@ -233,6 +233,7 @@ void insert_all_words(int k, string file_name, SortedList & L){
     t.start();
     for (string word; (in >> word) && limit > 0; --limit)
         L.insert(word);
+    cout << L << endl;
     t.elapsedUserTime(eTime);
     in.close();
     cout << "\t\tI = " << eTime << endl;
@@ -259,6 +260,7 @@ void remove_all_words(int k, string file_name, SortedList & L) {
     t.start();
     for (string word; (in >> word) && limit > 0; --limit)
         L.remove(word);
+    cout << L << endl;
     t.elapsedUserTime(eTime);
     in.close();
     cout << "\t\tR = " << eTime << endl;
