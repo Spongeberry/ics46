@@ -19,7 +19,7 @@ int SortedArrayList::find_index(const string & word){
         }else if(buf[mid] == word){
             return mid;
         }
-        return -1;
+    return -1;
     }
 
 void SortedArrayList::copy_down(int hole){
@@ -52,7 +52,7 @@ void SortedArrayList::insert(const string & word){
 }
 
 bool SortedArrayList::find(const string & word){
-    return SortedArrayList::find_index(word) != 1;
+    return SortedArrayList::find_index(word) != -1;
 }
 
 void SortedArrayList::remove(const string & word){
@@ -118,14 +118,13 @@ SortedLinkedList::iterator SortedLinkedList::end() {
     return iterator(nullptr);
 }
 
-//string data;
-//ListNode * next;
 void ListNode::print(ostream & out, ListNode * L){
-    for(ListNode * current = L; L; current = current -> next)
+    for(ListNode * current = L; current; current = current -> next)
         out << current -> data << ' ';
 }
 
 void ListNode::insert(const string & word, ListNode * & L) {
+
     ListNode *newNode = new ListNode(word, nullptr);
 
     // If the list is empty or the new node should be inserted at the beginning
@@ -147,6 +146,7 @@ void ListNode::insert(const string & word, ListNode * & L) {
 }
 
 ListNode * ListNode::find(const string & word, ListNode * L) {
+
     ListNode *current = L;
     while (current != nullptr && current->data <= word) {
         if (current->data == word) {
@@ -164,6 +164,7 @@ void ListNode::delete_list(ListNode * L) {
 }
 
 void ListNode::remove(const std::string & word, ListNode * & L) {
+
     ListNode *prev = nullptr;
 
     for (ListNode *current = L; current; current = current->next) {
@@ -196,7 +197,7 @@ void SortedLinkedList::remove(const std::string & word) {
 }
 
 bool SortedLinkedList::is_empty() {
-    return head == nullptr;
+    return !head;
 }
 
 bool SortedLinkedList::is_full() {
@@ -224,7 +225,7 @@ void insert_all_words(int k, string file_name, SortedList & L){
     t.start();
     for (string word; (in >> word) && limit > 0; --limit)
         L.insert(word);
-        cout << L << endl;
+    cout << L << endl;
     t.elapsedUserTime(eTime);
     in.close();
     cout << "\t\tI = " << eTime << endl;
@@ -251,13 +252,14 @@ void remove_all_words(int k, string file_name, SortedList & L) {
     t.start();
     for (string word; (in >> word) && limit > 0; --limit)
         L.remove(word);
-        cout << L << endl;
+    cout << L << endl;
     t.elapsedUserTime(eTime);
     in.close();
     cout << "\t\tR = " << eTime << endl;
 }
 
 void measure_UnorderedList_methods(string file_name, SortedList & L){
+
     cout << L.name << endl;
     int K = 1;
     for (K = 1; K <= 10; ++K){
