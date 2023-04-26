@@ -168,6 +168,7 @@ void ListNode::delete_list(ListNode * L) {
         ListNode* temp = curr;
         curr = curr->next;
         delete temp;
+    head = nullptr;
 }
 
 void ListNode::remove(const std::string & word, ListNode * & L) {
