@@ -41,6 +41,11 @@ SortedArrayList::SortedArrayList(int cap)
 :SortedList("SAL"), capacity(cap), size(0), buf(new string[cap]){}
 
 void SortedArrayList::insert(const string & word){
+    if (is_full()) {
+        cout << "The array is full. Cannot insert a new element." << endl;
+        return;
+    }
+
     int hole = size;
     while (hole > 0 && word < buf[hole - 1])
     {
