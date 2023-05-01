@@ -1,8 +1,5 @@
 #include "holder.h"
 
-
-
-
 int main()
 {
     ArrayStack A(5);
@@ -34,4 +31,26 @@ int main()
     cout << "Stack contents: ";
     stack.print(cout);
     cout << endl;
+    cout << endl;
+    // Test ArrayQueue
+    ArrayQueue q(5);
+    q.enq("apple");
+    q.enq("banana");
+    q.enq("cherry");
+    q.print(cout);  // expected output: apple banana cherry
+    cout << endl;   // print a newline character
+    q.deq();
+    q.print(cout);  // expected output: banana cherry
+    q.enq("date");
+    q.enq("elderberry");
+    q.enq("fig");
+    cout << q.is_full() << endl;  // expected output: 1
+    q.print(cout);  // expected output: banana cherry date elderberry fig
+    q.deq();
+    q.deq();
+    q.deq();
+    q.print(cout);  // expected output: elderberry fig
+    q.deq();
+    q.deq();
+    cout << q.is_empty() << endl;  // expected output: 1
 }

@@ -92,10 +92,39 @@ LinkedStack::~LinkedStack(){
     ListNode::delete_list(head);
 }
 
+//ArrayQueue
+ArrayQueue::ArrayQueue(int cap)
+:Queue("ArrayQueue"), capacity(cap + 1), front(0), rear(0), buf(new string[cap + 1]){}
 
+void ArrayQueue::enq(const string & word){
+    buf[rear] = word;
+    rear = (rear + 1) % capacity;
+}
 
+void ArrayQueue::deq(){
+    front = (front + 1) % capacity;
+}
 
+string ArrayQueue::next(){
+    return buf[front];
+}
 
+bool ArrayQueue::is_empty(){
+    return rear == front;
+}
+
+bool ArrayQueue::is_full(){
+    return (rear + 1) % capacity == front;
+}
+
+void ArrayQueue::print(ostream & out){
+    for (int i = front; i != rear; i = (i + 1) % capacity)
+        out << buf[i] << " ";
+}
+
+ArrayQueue::~ArrayQueue(){
+    delete[] buf;
+}
 
 
 
