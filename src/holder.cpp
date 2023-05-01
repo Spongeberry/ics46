@@ -36,8 +36,8 @@ bool ArrayStack::is_full(){
     return size >= capacity;
 }
 
-void ArrayStack::print(ostream & out){
-    for (int i = 0; i != size; ++i)
+void ArrayStack::print(ostream & out) {
+    for (int i = size - 1; i >= 0; --i)
         out << buf[i] << " ";
 }
 
@@ -48,7 +48,7 @@ ArrayStack::~ArrayStack(){
 //ListNode
 void ListNode::print(ostream & out, ListNode * L){
     for (; L; L = L -> next)
-        out << (L -> data);
+        out << (L -> data) << " ";
 }
 
 void ListNode::delete_list(ListNode * L){

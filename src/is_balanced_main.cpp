@@ -2,5 +2,5 @@
 
 int main()
 {
-    //test_is_balanced();
+    test_is_balanced();
 }
