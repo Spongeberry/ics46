@@ -44,6 +44,54 @@ ArrayStack::~ArrayStack(){
     delete[] buf;
 }
 
+//ListNode
+void ListNode::print(ostream & out, ListNode * L){
+    for (; L; L = L -> next)
+        out << (L -> data);
+}
+
+void ListNode::delete_list(ListNode * L){
+    for (ListNode * temp = L; temp; ){
+        temp = L -> next;
+        delete L;
+        L = temp;
+    }
+}
+
+//LinkedStack
+LinkedStack::LinkedStack()
+:Stack("LinkedStack"), head(nullptr){}
+
+void LinkedStack::push(const string & word){
+    head = new ListNode(word, head);
+}
+
+void LinkedStack::pop(){
+    ListNode * temp = head;
+    head = head -> next;
+    delete temp;
+}
+
+string LinkedStack::top(){
+    return head -> data;
+}
+
+bool LinkedStack::is_empty(){
+    return !head;
+}
+
+bool LinkedStack::is_full(){
+    return false;
+}
+
+void LinkedStack::print(ostream & out){
+    ListNode::print(out, head);
+}
+
+LinkedStack::~LinkedStack(){
+    ListNode::delete_list(head);
+}
+
 
 
 
