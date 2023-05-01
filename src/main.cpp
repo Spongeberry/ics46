@@ -2,14 +2,14 @@
 
 int main()
 {
-    ArrayStack A(5);
+    /*ArrayStack A(5);
     A.push("5");
     A.push("6");
     A.pop();
     A.top();
-    cout << A;
-    //measure_holders("src/words.txt");
-
+    cout << A;*/
+    measure_holders("src/words.txt");
+    /*
     LinkedStack stack;
 
     // Test push and top
@@ -53,4 +53,23 @@ int main()
     q.deq();
     q.deq();
     cout << q.is_empty() << endl;  // expected output: 1
+    // Test LinkedQueue
+    LinkedQueue lq;
+    lq.enq("Alice");
+    lq.enq("Bob");
+    lq.enq("Charlie");
+    lq.print(cout);  // expected output: Alice Bob Charlie
+    lq.deq();
+    lq.print(cout);  // expected output: Bob Charlie
+    lq.enq("Dave");
+    lq.enq("Eve");
+    cout << lq.is_empty() << endl;  // expected output: 0
+    lq.print(cout);  // expected output: Bob Charlie Dave Eve
+    lq.deq();
+    lq.deq();
+    lq.print(cout);  // expected output: Dave Eve
+    lq.deq();
+    lq.deq();
+    cout << lq.is_empty() << endl;  // expected output: 1
+    */
 }
