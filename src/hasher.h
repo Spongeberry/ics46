@@ -241,4 +241,26 @@ struct ChatGPTHasher
         return hash_val;
     }
 };
+
+struct MyHasher
+    : public Hasher
+{
+    MyHasher()
+        : Hasher("MyHasher")
+    {
+    }
+
+    size_t hash(string key, int N) const
+    {
+        unsigned long hash = 5381; 
+        int c;
+
+        for (std::size_t i = 0; i < key.size(); ++i) {
+            c = key[i];
+            hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+        }
+
+        return hash % N;
+    }
+};
 #endif

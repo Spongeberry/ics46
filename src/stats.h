@@ -45,6 +45,12 @@ struct Stats {
         out << "StdDev = " << stddev << endl;
         // print_histogram(out);
     }
+
+    double compute_mean(const vector<int> &chain_lengths);
+    double compute_stddev(const vector<int> &chain_lengths);
+    void find_min_max_entries_chains(const vector<int> &chain_lengths);
+
+
 };
 
 #endif
