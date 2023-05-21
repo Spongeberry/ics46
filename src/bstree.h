@@ -18,6 +18,7 @@ public:
     void remove(const string & key);
     bool is_empty() const;
     int get_height() const;
+    
 };
 
 #endif

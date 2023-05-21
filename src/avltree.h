@@ -6,6 +6,7 @@
 class AVLTree
     : public BST
 {
+public:
     static int get_height(Node * node);
     static int get_balance(Node * node);
     static void set_height(Node * node);
@@ -15,6 +16,7 @@ class AVLTree
     static Node * insert_node(Node * t, string key);
     static Node * find_node(Node * t, string key);
     static Node * delete_node(Node * t, string key);
+    static Node * left_most(Node * t);
 public:
     AVLTree();
     void insert(const string & key);
