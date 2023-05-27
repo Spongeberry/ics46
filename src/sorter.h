@@ -3,13 +3,15 @@
 
 #include <string>
 #include <vector>
+#include <cmath>
+#include <algorithm>
 using namespace std;
 
 constexpr int NWORDS = 45392;
 
 class Sorter
 {
-protected:
+public:
     vector<string> vec;
 public:
     const string name;
@@ -52,6 +54,7 @@ class IntroSorter : public Sorter
 {
 public:
     IntroSorter() : Sorter("IntroSorter") { }
+    static void introsort(vector<string>& vec, int low, int high, int depth_limit);
     static void introsort(vector<string>& vec, int low, int high);
     void sort() override;
 };
